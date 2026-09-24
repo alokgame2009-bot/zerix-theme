@@ -1,0 +1,57 @@
+/* ZERIX 2.0 — visual layer for Pterodactyl */
+:root{
+ --zerix-primary:#8b5cf6;--zerix-secondary:#22d3ee;--zerix-accent:#3b82f6;
+ --zerix-bg:#070812;--zerix-panel:#0d1020;--zerix-panel2:#11162a;--zerix-border:rgba(255,255,255,.085);
+ --zerix-text:#eef2ff;--zerix-muted:#8f98b3;--zerix-radius:16px;--zerix-glow:.22;
+}
+html,body,#app{background:var(--zerix-bg)!important;color:var(--zerix-text)!important;min-height:100%;}
+body{background-image:radial-gradient(circle at 15% 0%,color-mix(in srgb,var(--zerix-primary) 12%,transparent),transparent 30%),radial-gradient(circle at 90% 10%,color-mix(in srgb,var(--zerix-secondary) 9%,transparent),transparent 28%)!important;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+*,*::before,*::after{border-color:var(--zerix-border)!important;}
+/* cards / panels */
+.bg-neutral-50,.bg-neutral-100,.bg-neutral-200,.bg-gray-50,.bg-gray-100,.bg-gray-200,.bg-white{background:linear-gradient(145deg,var(--zerix-panel2),var(--zerix-panel))!important;color:var(--zerix-text)!important;}
+.shadow,.shadow-sm,.shadow-md,.shadow-lg,.shadow-xl{box-shadow:0 14px 45px rgba(0,0,0,.28),0 0 28px color-mix(in srgb,var(--zerix-primary) calc(var(--zerix-glow)*100%),transparent)!important;}
+.rounded,.rounded-md,.rounded-lg,.rounded-xl,.rounded-2xl{border-radius:var(--zerix-radius)!important;}
+/* sidebar */
+aside,nav{background:rgba(7,8,18,.86)!important;backdrop-filter:blur(18px);}
+aside a,nav a{transition:.18s ease!important;border-radius:12px!important;color:#aab2ca!important;}
+aside a:hover,nav a:hover{background:rgba(139,92,246,.10)!important;color:#fff!important;transform:translateX(2px);}
+aside a[class*="bg-"],nav a[class*="bg-"]{background:linear-gradient(90deg,color-mix(in srgb,var(--zerix-primary) 20%,transparent),transparent)!important;color:#fff!important;box-shadow:inset 3px 0 0 var(--zerix-primary),0 0 20px color-mix(in srgb,var(--zerix-primary) 12%,transparent)!important;}
+/* top/header */
+header{background:rgba(7,8,18,.72)!important;backdrop-filter:blur(16px);}
+/* buttons */
+button,.btn,[type=button],[type=submit]{border-radius:12px!important;transition:transform .16s ease,box-shadow .16s ease,filter .16s ease!important;}
+button:hover,.btn:hover,[type=button]:hover,[type=submit]:hover{transform:translateY(-1px);filter:brightness(1.08);}
+button[class*="bg-primary"],button[class*="bg-blue"],button[class*="bg-indigo"],[type=submit]{background:linear-gradient(135deg,var(--zerix-primary),var(--zerix-accent))!important;color:#fff!important;box-shadow:0 8px 25px color-mix(in srgb,var(--zerix-primary) 25%,transparent)!important;}
+/* inputs */
+input,textarea,select{background:#090c18!important;color:#eef2ff!important;border:1px solid var(--zerix-border)!important;border-radius:12px!important;outline:none!important;transition:.18s ease!important;}
+input:focus,textarea:focus,select:focus{border-color:color-mix(in srgb,var(--zerix-primary) 70%,transparent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--zerix-primary) 12%,transparent)!important;}
+/* tables */
+table{border-collapse:separate!important;border-spacing:0!important;background:rgba(13,16,32,.75)!important;border:1px solid var(--zerix-border)!important;border-radius:16px!important;overflow:hidden!important;}
+thead{background:rgba(255,255,255,.035)!important;}
+th{color:#aeb7d0!important;text-transform:uppercase;font-size:.7rem;letter-spacing:.08em;}
+td{color:#dbe1f1!important;}
+tbody tr{transition:.15s ease!important;}
+tbody tr:hover{background:rgba(139,92,246,.055)!important;}
+/* links */
+a{color:#a9b7ff;}
+a:hover{color:#fff;}
+/* status / badges */
+[class*="bg-green"],.text-green-500,.text-green-600{filter:saturate(1.15);}
+/* terminal */
+.xterm,.xterm-viewport,.xterm-screen{background:#05060b!important;}
+/* login/auth */
+.zerix-auth{background:radial-gradient(circle at 50% 20%,rgba(139,92,246,.18),transparent 45%)!important;}
+/* server cards */
+.zerix-card{background:linear-gradient(145deg,rgba(17,22,42,.95),rgba(9,12,24,.95));border:1px solid var(--zerix-border);border-radius:18px;box-shadow:0 16px 45px rgba(0,0,0,.22);transition:.2s ease;}
+.zerix-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--zerix-primary) 35%,var(--zerix-border))!important;box-shadow:0 20px 55px rgba(0,0,0,.3),0 0 30px color-mix(in srgb,var(--zerix-primary) 10%,transparent);}
+/* ZERIX settings */
+#zerix-theme-open{position:fixed!important;right:18px!important;bottom:18px!important;z-index:99998!important;border:1px solid rgba(255,255,255,.12)!important;background:linear-gradient(135deg,var(--zerix-primary),var(--zerix-accent))!important;color:#fff!important;padding:10px 14px!important;font-weight:700!important;box-shadow:0 12px 35px rgba(0,0,0,.35)!important;}
+#zerix-theme-panel{position:fixed!important;right:18px!important;bottom:68px!important;width:min(390px,calc(100vw - 36px))!important;max-height:80vh!important;overflow:auto!important;z-index:99999!important;background:rgba(10,12,24,.97)!important;color:#eef2ff!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:20px!important;padding:20px!important;box-shadow:0 25px 80px rgba(0,0,0,.55)!important;backdrop-filter:blur(20px);}
+#zerix-theme-panel h3{margin:0 0 4px;font-size:18px;}#zerix-theme-panel p{color:var(--zerix-muted);font-size:12px;margin:0 0 16px;}
+#zerix-theme-panel label{display:block;font-size:11px;font-weight:700;color:#aab2ca;margin:12px 0 6px;text-transform:uppercase;letter-spacing:.05em;}
+#zerix-theme-panel input,#zerix-theme-panel textarea{width:100%;box-sizing:border-box;padding:9px 10px!important;}
+#zerix-theme-panel input[type=color]{height:38px;padding:3px!important;}#zerix-theme-panel textarea{min-height:100px;resize:vertical;}
+.zerix-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}.zerix-check{display:flex!important;align-items:center;gap:8px;}.zerix-check input{width:auto!important;}.zerix-actions{display:flex;gap:8px;margin-top:16px;}.zerix-actions button{flex:1;padding:10px;border:0!important;}
+/* compact */
+body.zerix-compact .p-6{padding:1rem!important;}body.zerix-compact .gap-6{gap:1rem!important;}
+@media(max-width:768px){aside{z-index:50}.zerix-row{grid-template-columns:1fr;}#zerix-theme-open{right:12px!important;bottom:12px!important;}}
