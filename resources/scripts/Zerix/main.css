@@ -1,0 +1,147 @@
+/*
+ * ZERIX Theme v1.0
+ * Original frontend visual layer for Pterodactyl.
+ */
+:root {
+  --zerix-bg: #05070f;
+  --zerix-bg2: #0a0f1d;
+  --zerix-card: rgba(12, 18, 33, .90);
+  --zerix-card2: rgba(17, 25, 45, .94);
+  --zerix-border: rgba(148,163,184,.14);
+  --zerix-primary: #8b5cf6;
+  --zerix-secondary: #22d3ee;
+  --zerix-accent: #3b82f6;
+  --zerix-success: #22c55e;
+  --zerix-danger: #f43f5e;
+  --zerix-text: #f8fafc;
+  --zerix-muted: #94a3b8;
+  --zerix-radius: 14px;
+  --zerix-glow: .18;
+  --zerix-bg-intensity: .14;
+}
+
+html, body, #app {
+  min-height: 100%;
+  background: var(--zerix-bg) !important;
+}
+body {
+  color: var(--zerix-text);
+  background:
+    radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--zerix-primary) 18%, transparent), transparent 32%),
+    radial-gradient(circle at 92% 10%, color-mix(in srgb, var(--zerix-secondary) 12%, transparent), transparent 28%),
+    var(--zerix-bg) !important;
+}
+body.zerix-compact [class*="p-"] { --tw-space-y-reverse: 0; }
+
+a { transition: color .18s ease, opacity .18s ease, transform .18s ease; }
+button, [role="button"] {
+  transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
+}
+button:hover, [role="button"]:hover {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+}
+
+[class*="border-neutral"], [class*="border-gray"] {
+  border-color: var(--zerix-border) !important;
+}
+.bg-neutral-50, .bg-neutral-100, .bg-gray-50, .bg-gray-100 {
+  background: transparent !important;
+}
+.bg-neutral-800, .bg-neutral-900, .bg-gray-800, .bg-gray-900 {
+  background-color: var(--zerix-bg2) !important;
+}
+.text-neutral-900, .text-gray-900 { color: var(--zerix-text) !important; }
+.text-neutral-500, .text-neutral-400, .text-gray-500, .text-gray-400 {
+  color: var(--zerix-muted) !important;
+}
+.rounded, .rounded-md, .rounded-lg, .rounded-xl, .rounded-2xl {
+  border-radius: var(--zerix-radius) !important;
+}
+.shadow, .shadow-md, .shadow-lg, .shadow-xl {
+  box-shadow: 0 18px 60px rgba(0,0,0,var(--zerix-glow)) !important;
+}
+
+input, textarea, select {
+  background: rgba(5,8,16,.72) !important;
+  color: var(--zerix-text) !important;
+  border-color: var(--zerix-border) !important;
+  border-radius: 10px !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--zerix-primary) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--zerix-primary) 16%, transparent) !important;
+}
+.bg-primary-500, .bg-primary-600 {
+  background: linear-gradient(135deg, var(--zerix-primary), var(--zerix-accent)) !important;
+}
+.text-primary-500, .text-primary-600 { color: var(--zerix-primary) !important; }
+
+[data-pc-section="sidebar"], nav, aside {
+  background: rgba(5,8,16,.78) !important;
+  backdrop-filter: blur(18px);
+  border-color: var(--zerix-border) !important;
+}
+[data-pc-section="sidebar"] a:hover, nav a:hover, aside a:hover {
+  background: color-mix(in srgb, var(--zerix-primary) 10%, transparent) !important;
+}
+
+.xterm, .xterm-viewport, .xterm-screen {
+  border-radius: 12px !important;
+}
+.xterm-viewport {
+  background: #02040a !important;
+}
+
+table, [role="table"] {
+  border-color: var(--zerix-border) !important;
+}
+tr:hover { background: color-mix(in srgb, var(--zerix-primary) 5%, transparent) !important; }
+
+body:has(form) {
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--zerix-primary) 22%, transparent), transparent 40%),
+    var(--zerix-bg) !important;
+}
+
+/* ZERIX customization drawer */
+#zerix-theme-open {
+  position: fixed; right: 18px; bottom: 18px; z-index: 99998;
+  border: 0; border-radius: 999px; padding: 11px 16px; cursor: pointer;
+  color: #fff; font-weight: 700;
+  background: linear-gradient(135deg,var(--zerix-primary),var(--zerix-accent));
+  box-shadow: 0 12px 34px rgba(0,0,0,.35);
+}
+#zerix-theme-panel {
+  position: fixed; right: 18px; bottom: 70px; z-index: 99999;
+  width: min(390px, calc(100vw - 36px));
+  max-height: min(78vh, 700px); overflow: auto;
+  color: #f8fafc; background: rgba(7,11,22,.97);
+  border: 1px solid color-mix(in srgb, var(--zerix-primary) 42%, transparent);
+  border-radius: 18px; padding: 16px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.55);
+  backdrop-filter: blur(22px);
+  font-family: Inter,system-ui,sans-serif;
+}
+#zerix-theme-panel[hidden] { display:none; }
+#zerix-theme-panel h3 { margin:0 0 4px; font-size:17px; }
+#zerix-theme-panel p { margin:0 0 14px; color:#94a3b8; font-size:12px; }
+#zerix-theme-panel label { display:block; margin:10px 0 5px; font-size:12px; color:#cbd5e1; }
+#zerix-theme-panel input, #zerix-theme-panel textarea {
+  width:100%; box-sizing:border-box; padding:9px 10px;
+}
+#zerix-theme-panel input[type=color] { height:38px; padding:3px; }
+#zerix-theme-panel textarea { min-height:90px; resize:vertical; }
+.zerix-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.zerix-check { display:flex; gap:8px; align-items:center; margin-top:10px; color:#cbd5e1; font-size:12px; }
+.zerix-actions { display:flex; gap:8px; margin-top:14px; }
+.zerix-actions button {
+  flex:1; border:0; border-radius:10px; padding:10px; color:#fff; cursor:pointer;
+}
+#zerix-save { background:linear-gradient(135deg,var(--zerix-primary),var(--zerix-accent)); }
+#zerix-reset { background:#18233b; }
+
+@media (max-width: 640px) {
+  #zerix-theme-panel { right:10px; bottom:65px; width:calc(100vw - 20px); }
+  #zerix-theme-open { right:10px; bottom:10px; }
+}
