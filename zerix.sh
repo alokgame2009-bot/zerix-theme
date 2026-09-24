@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-VERSION="1.3.1"
+VERSION="1.3.2"
 PANEL="${ZERIX_PANEL_PATH:-/var/www/pterodactyl}"
 REPO_RAW_BASE="${ZERIX_REPO_RAW_BASE:-https://raw.githubusercontent.com/alokgame2009-bot/zerix-theme/main}"
 
@@ -139,19 +139,39 @@ remove_imports(){
 build_panel(){
   cd "$PANEL"
   export CI=1
+
+  # Older Pterodactyl/Blueprint webpack stacks use hashing code that is
+  # incompatible with OpenSSL 3 used by newer Node.js versions. This
+  # compatibility flag fixes ERR_OSSL_EVP_UNSUPPORTED / 0308010C.
+  export NODE_OPTIONS="--openssl-legacy-provider${NODE_OPTIONS:+ $NODE_OPTIONS}"
+
+  local build_status=0
+
   if command -v yarn >/dev/null 2>&1 && [[ -f yarn.lock ]]; then
     say "Building frontend with Yarn..."
-    timeout --signal=TERM --kill-after=30s 45m yarn build:production
+    timeout --signal=TERM --kill-after=30s 45m yarn build:production || build_status=$?
   elif command -v npm >/dev/null 2>&1 && [[ -f package.json ]]; then
     say "Building frontend with npm..."
-    timeout --signal=TERM --kill-after=30s 45m npm run build:production
+    timeout --signal=TERM --kill-after=30s 45m npm run build:production || build_status=$?
   else
     die "No Yarn/npm build environment found."
-    return 1
   fi
+
+  # Never report success when webpack failed.
+  if [[ "$build_status" -ne 0 ]]; then
+    if [[ "$build_status" -eq 124 || "$build_status" -eq 137 || "$build_status" -eq 143 ]]; then
+      warn "Frontend build timed out or was terminated (exit $build_status)."
+    else
+      warn "Frontend build failed (exit $build_status)."
+    fi
+    return "$build_status"
+  fi
+
   if command -v php >/dev/null 2>&1 && [[ -f "$PANEL/artisan" ]]; then
     php artisan view:clear >/dev/null 2>&1 || true
   fi
+
+  return 0
 }
 
 write_state(){
@@ -163,6 +183,9 @@ install_theme(){
   require_root; require_commands; validate_panel; load_resources
   echo
   say "Installing/repairing ZERIX Theme v$VERSION"
+  if command -v node >/dev/null 2>&1; then
+    say "Node.js: $(node --version)"
+  fi
   create_backup
 
   # A previous failed install may have left partial files. Replace only ZERIX-owned files.
@@ -187,6 +210,9 @@ update_theme(){
   require_root; require_commands; validate_panel; load_resources
   echo
   say "Updating ZERIX Theme to v$VERSION"
+  if command -v node >/dev/null 2>&1; then
+    say "Node.js: $(node --version)"
+  fi
   create_backup
 
   mkdir -p "$THEME_DIR" "$PANEL/public/assets"
