@@ -6,7 +6,7 @@ set -Eeuo pipefail
 # Power by SkylerNodes | Made by Zyren
 # ============================================================
 
-VERSION="1.1.0"
+VERSION="1.2.0"
 PANEL="${ZERIX_PANEL_PATH:-/var/www/pterodactyl}"
 
 # GitHub repository
@@ -100,21 +100,12 @@ load_resources(){
 
   mkdir -p "$TMP_DIR/resources/scripts/Zerix/assets"
 
-  curl -fL --retry 3 --connect-timeout 10 \
-    "$REPO_RAW_BASE/resources/scripts/Zerix/main.css" \
-    -o "$TMP_DIR/resources/scripts/Zerix/main.css"
-
-  curl -fL --retry 3 --connect-timeout 10 \
-    "$REPO_RAW_BASE/resources/scripts/Zerix/theme.ts" \
-    -o "$TMP_DIR/resources/scripts/Zerix/theme.ts"
-
-  curl -fL --retry 3 --connect-timeout 10 \
-    "$REPO_RAW_BASE/resources/scripts/Zerix/assets/zerix-icon.svg" \
-    -o "$TMP_DIR/resources/scripts/Zerix/assets/zerix-icon.svg"
-
-  curl -fL --retry 3 --connect-timeout 10 \
-    "$REPO_RAW_BASE/resources/scripts/Zerix/assets/theme.json" \
-    -o "$TMP_DIR/resources/scripts/Zerix/assets/theme.json"
+  # Download all 4 small files in parallel.
+  curl -fsSL --retry 2 --connect-timeout 5 "$REPO_RAW_BASE/resources/scripts/Zerix/main.css" -o "$TMP_DIR/resources/scripts/Zerix/main.css" &
+  curl -fsSL --retry 2 --connect-timeout 5 "$REPO_RAW_BASE/resources/scripts/Zerix/theme.ts" -o "$TMP_DIR/resources/scripts/Zerix/theme.ts" &
+  curl -fsSL --retry 2 --connect-timeout 5 "$REPO_RAW_BASE/resources/scripts/Zerix/assets/zerix-icon.svg" -o "$TMP_DIR/resources/scripts/Zerix/assets/zerix-icon.svg" &
+  curl -fsSL --retry 2 --connect-timeout 5 "$REPO_RAW_BASE/resources/scripts/Zerix/assets/theme.json" -o "$TMP_DIR/resources/scripts/Zerix/assets/theme.json" &
+  wait
 
   RESOURCE_DIR="$TMP_DIR/resources"
   ok "ZERIX resources downloaded."
@@ -125,6 +116,7 @@ create_backup(){
 
   cp -a "$INDEX" "$BACKUP/index.tsx"
 
+  # Keep the backup focused on files this installer changes.
   if [[ -d "$THEME_DIR" ]]; then
     cp -a "$THEME_DIR" "$BACKUP/Zerix"
   fi
@@ -206,10 +198,9 @@ build_panel(){
     die "Neither Yarn nor npm build environment was found."
   fi
 
+  # Clear only the frontend/view cache needed after the build.
   if command -v php >/dev/null 2>&1 && [[ -f artisan ]]; then
     php artisan view:clear >/dev/null 2>&1 || true
-    php artisan config:clear >/dev/null 2>&1 || true
-    php artisan cache:clear >/dev/null 2>&1 || true
   fi
 }
 
