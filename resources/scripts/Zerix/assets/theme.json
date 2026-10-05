@@ -1,8 +1,0 @@
-{
-  "name": "ZERIX Theme",
-  "version": "1.0.0",
-  "description": "Original modern dark theme layer for Pterodactyl.",
-  "author": "ZERIX",
-  "icon": "assets/zerix-icon.svg",
-  "type": "pterodactyl-theme"
-}
