@@ -2,7 +2,8 @@
 Modern dark/glass visual layer for Pterodactyl.
 
 One command
-````bash <(curl -fsSL https://raw.githubusercontent.com/alokgame2009-bot/zerix-theme/main/zerix.sh)````
+
+```bash <(curl -fsSL https://raw.githubusercontent.com/alokgame2009-bot/zerix-theme/main/zerix.sh)```
 
 ## Compatibility
 This package targets Pterodactyl 1.12 and Blueprint's extension model. Test on a staging panel before production. Blueprint's current docs support `dashboard.css`, `dashboard.wrapper`, `dashboard.components`, `admin.css`, `admin.view`, and `admin.wrapper`.
