@@ -1,0 +1,18 @@
+info:
+  name: 'Zerix V3 UI'
+  identifier: 'zerix'
+  description: 'A polished Arix-inspired UI extension for Pterodactyl.'
+  version: '3.0.0'
+  target: '1.12'
+  author: 'Zerix'
+  website: 'https://github.com/'
+
+admin:
+  view: 'resources/views/admin.blade.php'
+  css: 'resources/css/admin.css'
+  wrapper: 'resources/views/admin-wrapper.blade.php'
+
+dashboard:
+  css: 'resources/css/dashboard.css'
+  wrapper: 'resources/views/dashboard-wrapper.blade.php'
+  components: 'components'

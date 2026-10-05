@@ -1,0 +1,9 @@
+Navigation:
+  NavigationBar:
+    AfterNavigation: 'ZerixBadge'
+  Routes:
+    - { Name: 'Zerix', Path: '/zerix', Type: 'account', Component: 'ZerixPage', AdminOnly: 'false' }
+
+Dashboard:
+  Serverlist:
+    BeforeContent: 'ZerixBadge'
