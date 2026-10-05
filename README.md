@@ -1,19 +1,10 @@
-# Zerix V3 — Pterodactyl UI
+ZERIX Theme V4
+Modern dark/glass visual layer for Pterodactyl.
 
-A polished, original Arix-inspired interface for Pterodactyl. It does not contain Arix proprietary source code or assets.
+One command
+bash <(curl -fsSL https://raw.githubusercontent.com/alokgame2009-bot/zerix-theme/main/zerix.sh)
 
-## Included
-- Client dashboard styling
-- Authentication/login visual styling
-- Server cards and management UI styling
-- Console, files, databases, schedules, backups, network, startup and settings styling
-- Account/profile styling
-- Legacy admin/Bootstrap styling
-- Responsive/mobile layout
-- Theme variables and accent-color controls
-- Blueprint `conf.yml`
-- Blueprint dashboard/admin wrappers
-- Optional React component extension example
+Menu: Install, Uninstall, Update, Exit.
 
 ## Compatibility
 This package targets Pterodactyl 1.12 and Blueprint's extension model. Test on a staging panel before production. Blueprint's current docs support `dashboard.css`, `dashboard.wrapper`, `dashboard.components`, `admin.css`, `admin.view`, and `admin.wrapper`.
